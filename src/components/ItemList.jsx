@@ -1,35 +1,11 @@
-const defaultItems = [
-	{
-		name: "good mood",
-		packed: true,
-	},
-	{
-		name: "passport",
-		packed: false,
-	},
-	{
-		name: "phone charger",
-		packed: false,
-	},
-];
+import Item from "./Item";
 
-export default function ItemList() {
+export default function ItemList({ items }) {
 	return (
 		<ul>
-			{defaultItems.map((item) => (
-				<Item key={item.name} itemName={item.name} packed={item.packed} />
+			{items.map((item) => (
+				<Item key={item.id} item={item} />
 			))}
 		</ul>
-	);
-}
-
-function Item({ itemName, packed }) {
-	return (
-		<li className="item">
-			<label>
-				<input type="checkbox" checked={packed} />
-				{itemName}
-			</label>
-		</li>
 	);
 }
