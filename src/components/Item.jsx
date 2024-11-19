@@ -1,12 +1,16 @@
-export default function Item({ item }) {
+export default function Item({ item, handleToggleItem, handleDeleteItem }) {
 	return (
 		<li className="item">
 			<label>
-				<input type="checkbox" checked={item.packed} />
+				<input
+					onChange={() => handleToggleItem(item.id)}
+					type="checkbox"
+					checked={item.packed}
+				/>
 				{item.name}
 			</label>
 
-			<button>❌</button>
+			<button onClick={() => handleDeleteItem(item.id)}>❌</button>
 		</li>
 	);
 }

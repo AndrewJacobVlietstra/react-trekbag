@@ -1,10 +1,3 @@
-export const secondaryButtonText = [
-	"Mark all as complete",
-	"Mark all as incomplete",
-	"Reset to initial",
-	"Remove all items",
-];
-
 export const defaultListItems = [
 	{
 		id: 1,
