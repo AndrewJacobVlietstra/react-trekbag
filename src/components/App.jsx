@@ -59,12 +59,19 @@ export default function App() {
 		return setItems(newItems);
 	};
 
+	const totalItems = () => items.length;
+
+	const totalPackedItems = () => {
+		const packedItems = items.filter((item) => item.packed).length;
+		return packedItems;
+	};
+
 	return (
 		<>
 			<BackgroundHeading />
 
 			<main>
-				<Header />
+				<Header totalItems={totalItems} totalPackedItems={totalPackedItems} />
 				<ItemList
 					items={items}
 					handleToggleItem={handleToggleItem}
