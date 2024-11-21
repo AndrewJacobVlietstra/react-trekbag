@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { defaultListItems } from "../lib/constants";
 import BackgroundHeading from "./BackgroundHeading";
 import Footer from "./Footer";
@@ -7,7 +7,11 @@ import ItemList from "./ItemList";
 import Sidebar from "./Sidebar";
 
 export default function App() {
-	const [items, setItems] = useState(defaultListItems);
+	// Function inside useState will only run when component mounts
+	// this is to avoid calling localStorage every re-render
+	const [items, setItems] = useState(
+		() => JSON.parse(localStorage.getItem("items")) || defaultListItems
+	);
 
 	const handleAddItem = (newItemText) => {
 		const newItem = {
@@ -65,6 +69,10 @@ export default function App() {
 		const packedItems = items.filter((item) => item.packed).length;
 		return packedItems;
 	};
+
+	useEffect(() => {
+		localStorage.setItem("items", JSON.stringify(items));
+	}, [items]);
 
 	return (
 		<>

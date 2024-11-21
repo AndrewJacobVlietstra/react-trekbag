@@ -1,6 +1,6 @@
-import Select from "react-select";
 import EmptyView from "./EmptyView";
 import Item from "./Item";
+import Select from "react-select";
 import { useState } from "react";
 
 const sortingOptions = [
