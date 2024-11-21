@@ -5,6 +5,11 @@ import Footer from "./Footer";
 import Header from "./Header";
 import ItemList from "./ItemList";
 import Sidebar from "./Sidebar";
+import Logo from "./Logo";
+import Counter from "./Counter";
+import ProgressBar from "./ProgressBar";
+import AddItemForm from "./AddItemForm";
+import ButtonGroup from "./ButtonGroup";
 
 export default function App() {
 	// Function inside useState will only run when component mounts
@@ -70,6 +75,17 @@ export default function App() {
 		return packedItems;
 	};
 
+	const totalProgress = () => {
+		let progressPercentage = Math.floor(
+			(totalPackedItems() / totalItems()) * 100
+		);
+		if (isNaN(progressPercentage)) {
+			return (progressPercentage = 0);
+		}
+
+		return progressPercentage;
+	};
+
 	useEffect(() => {
 		localStorage.setItem("items", JSON.stringify(items));
 	}, [items]);
@@ -79,19 +95,31 @@ export default function App() {
 			<BackgroundHeading />
 
 			<main>
-				<Header totalItems={totalItems} totalPackedItems={totalPackedItems} />
+				<Header>
+					<Logo />
+					<Counter
+						totalItems={totalItems}
+						totalPackedItems={totalPackedItems}
+						totalProgress={totalProgress}
+					/>
+					<ProgressBar totalProgress={totalProgress} />
+				</Header>
+
 				<ItemList
 					items={items}
 					handleToggleItem={handleToggleItem}
 					handleDeleteItem={handleDeleteItem}
 				/>
-				<Sidebar
-					handleAddItem={handleAddItem}
-					handleRemoveAllItems={handleRemoveAllItems}
-					handleResetToInitial={handleResetToInitial}
-					handleMarkAllAsComplete={handleMarkAllAsComplete}
-					handleMarkAllAsIncomplete={handleMarkAllAsIncomplete}
-				/>
+
+				<Sidebar>
+					<AddItemForm onAddItem={handleAddItem} />
+					<ButtonGroup
+						handleRemoveAllItems={handleRemoveAllItems}
+						handleResetToInitial={handleResetToInitial}
+						handleMarkAllAsComplete={handleMarkAllAsComplete}
+						handleMarkAllAsIncomplete={handleMarkAllAsIncomplete}
+					/>
+				</Sidebar>
 			</main>
 
 			<Footer />
