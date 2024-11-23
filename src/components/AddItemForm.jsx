@@ -1,7 +1,9 @@
 import { useRef, useState } from "react";
 import Button from "./Button";
+import { useItemsContext } from "../lib/hooks";
 
-export default function AddItemForm({ onAddItem }) {
+export default function AddItemForm() {
+	const { handleAddItem } = useItemsContext();
 	const [itemText, setItemText] = useState("");
 	const inputRef = useRef();
 
@@ -12,7 +14,7 @@ export default function AddItemForm({ onAddItem }) {
 
 		if (!itemText) return inputRef.current.focus();
 
-		onAddItem(itemText);
+		handleAddItem(itemText);
 		setItemText("");
 		return inputRef.current.focus();
 	};

@@ -2,6 +2,7 @@ import EmptyView from "./EmptyView";
 import Item from "./Item";
 import Select from "react-select";
 import { useMemo, useState } from "react";
+import { useItemsContext } from "../lib/hooks";
 
 const sortingOptions = [
 	{
@@ -18,13 +19,9 @@ const sortingOptions = [
 	},
 ];
 
-export default function ItemList({
-	items,
-	handleToggleItem,
-	handleDeleteItem,
-}) {
+export default function ItemList() {
+	const { items, handleToggleItem, handleDeleteItem } = useItemsContext();
 	const [sortBy, setSortBy] = useState("default");
-
 	const sortedItems = useMemo(
 		() =>
 			[...items].sort((a, b) => {
@@ -49,7 +46,7 @@ export default function ItemList({
 				<section className="sorting">
 					<Select
 						onChange={(option) => setSortBy(option.value)}
-						defaultValue={sortingOptions[0]}
+						defaultValue={sortingOptions.at(0)}
 						options={sortingOptions}
 					/>
 				</section>
