@@ -1,13 +1,23 @@
 import { useRef, useState } from "react";
 import Button from "./Button";
 import { useItemsContext } from "../lib/hooks";
+import { MAXIMUM_ITEM_TEXT_LENGTH } from "../lib/constants";
 
 export default function AddItemForm() {
 	const { handleAddItem } = useItemsContext();
 	const [itemText, setItemText] = useState("");
 	const inputRef = useRef();
 
-	const handleInputChange = (e) => setItemText(e.target.value);
+	const handleInputChange = (e) => {
+		const inputValue = e.target.value;
+		if (inputValue.length > MAXIMUM_ITEM_TEXT_LENGTH) {
+			console.error(
+				`Item text should not exceed ${MAXIMUM_ITEM_TEXT_LENGTH} characters!`
+			);
+			return;
+		}
+		return setItemText(inputValue);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -21,7 +31,12 @@ export default function AddItemForm() {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h2>Add an item</h2>
+			{itemText.length >= MAXIMUM_ITEM_TEXT_LENGTH ? (
+				<h2 className="warning">Maximum Text Limit Reached!</h2>
+			) : (
+				<h2>Add An Item</h2>
+			)}
+
 			<input
 				ref={inputRef}
 				type="text"
@@ -30,6 +45,7 @@ export default function AddItemForm() {
 				onChange={handleInputChange}
 				autoFocus={true}
 			/>
+
 			<Button>Add to list</Button>
 		</form>
 	);

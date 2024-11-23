@@ -15,3 +15,5 @@ export const defaultListItems = [
 		packed: false,
 	},
 ];
+
+export const MAXIMUM_ITEM_TEXT_LENGTH = 50;

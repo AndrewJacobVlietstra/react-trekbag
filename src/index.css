@@ -83,8 +83,8 @@ header {
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
 	background-color: #fff;
-	overflow-y: scroll;
-	scrollbar-color: #333 #f1d4b3;
+	overflow-y: auto;
+	scrollbar-color: #555 #f1d4b3;
 	scrollbar-width: thin;
 	position: relative;
 }
@@ -273,6 +273,10 @@ h1 {
 	z-index: -1;
 	text-transform: uppercase;
 	letter-spacing: 0.2em;
+}
+
+.warning {
+	color: red;
 }
 
 @media (max-height: 950px) {
