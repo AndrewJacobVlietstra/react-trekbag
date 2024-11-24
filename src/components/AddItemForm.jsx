@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import Button from "./Button";
-import { useItemsContext } from "../lib/hooks";
 import { MAXIMUM_ITEM_TEXT_LENGTH } from "../lib/constants";
+import { useItemsStore } from "../stores/itemsStore";
 
 export default function AddItemForm() {
-	const { handleAddItem } = useItemsContext();
+	const addItem = useItemsStore((state) => state.addItem);
 	const [itemText, setItemText] = useState("");
 	const inputRef = useRef();
 
@@ -24,7 +24,7 @@ export default function AddItemForm() {
 
 		if (!itemText) return inputRef.current.focus();
 
-		handleAddItem(itemText);
+		addItem(itemText);
 		setItemText("");
 		return inputRef.current.focus();
 	};

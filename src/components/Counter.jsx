@@ -1,8 +1,8 @@
-import { useItemsContext } from "../lib/hooks";
-
-export default function Counter() {
-	const { totalItems, totalPackedItems, totalProgress } = useItemsContext();
-
+export default function Counter({
+	totalItems,
+	totalPackedItems,
+	totalProgress,
+}) {
 	return (
 		<p>
 			<b>{totalPackedItems()}</b> / {totalItems()} items packed (

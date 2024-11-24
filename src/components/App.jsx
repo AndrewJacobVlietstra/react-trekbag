@@ -3,7 +3,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 import ItemList from "./ItemList";
 import Sidebar from "./Sidebar";
-import ItemsContextProvider from "../contexts/ItemsContextProvider";
 
 export default function App() {
 	return (
@@ -11,11 +10,9 @@ export default function App() {
 			<BackgroundHeading />
 
 			<main>
-				<ItemsContextProvider>
-					<Header />
-					<ItemList />
-					<Sidebar />
-				</ItemsContextProvider>
+				<Header />
+				<ItemList />
+				<Sidebar />
 			</main>
 
 			<Footer />

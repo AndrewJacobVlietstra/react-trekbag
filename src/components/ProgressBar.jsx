@@ -1,8 +1,4 @@
-import { useItemsContext } from "../lib/hooks";
-
-export default function ProgressBar() {
-	const { totalProgress } = useItemsContext();
-
+export default function ProgressBar({ totalProgress }) {
 	return (
 		<div className="progress-bar" style={{ width: `${totalProgress()}%` }}>
 			&nbsp;
